@@ -1,11 +1,9 @@
 package golangerrorslint
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"go/parser"
-	"go/printer"
 	"go/token"
 	"io/ioutil"
 	"path"
@@ -172,14 +170,6 @@ func extractReplacement(line string) (string, bool) {
 		return "", false
 	}
 	return line[a+len(start) : b], true
-}
-
-func render(fset *token.FileSet, x interface{}) string {
-	var buf bytes.Buffer
-	if err := printer.Fprint(&buf, fset, x); err != nil {
-		panic(err)
-	}
-	return buf.String()
 }
 
 func TestLine(t *testing.T) {
