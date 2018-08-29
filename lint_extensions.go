@@ -419,14 +419,14 @@ func (f *file) lintErrorStrings() {
 		if !ok {
 			return true
 		}
-		if !isPkgDot(ce.Fun, "errors", "New") && !isPkgDot(ce.Fun, "fmt", "Errorf") && !isPkgDot(ce.Fun, "errors", "New") && !isPkgDot(ce.Fun, "errors", "Wrapf") && !isPkgDot(ce.Fun, "errors", "Wrap") {
+		if !isPkgDot(ce.Fun, "errors", "New") && !isPkgDot(ce.Fun, "errors", "Wrapf") && !isPkgDot(ce.Fun, "errors", "Wrap") {
 			return true
 		}
 		if len(ce.Args) < 1 {
 			return true
 		}
 		stringPos := 0
-		if isPkgDot(ce.Fun, "errors", "Wrapf") {
+		if isPkgDot(ce.Fun, "errors", "Wrapf") || isPkgDot(ce.Fun, "errors", "Wrap") {
 			stringPos = 1
 		}
 		str, ok := ce.Args[stringPos].(*ast.BasicLit)
